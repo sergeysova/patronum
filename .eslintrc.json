@@ -4,7 +4,7 @@
   "extends": ["@atomix/eslint-config", "plugin:prettier/recommended"],
   "overrides": [
     {
-      "files": ["**/*.test.ts", "**/*.test.tsx", "_/**.js"],
+      "files": ["**/*.test.ts", "**/*.test.tsx", "scripts/**.js"],
       "env": { "jest": true },
       "rules": {
         "import/no-extraneous-dependencies": "off"

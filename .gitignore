@@ -178,3 +178,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/node,windows,linux,macos
+
+dist-package
