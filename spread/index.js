@@ -1,21 +1,21 @@
-/* eslint-disable no-param-reassign */
 const { createEvent, sample, guard } = require('effector');
+const { readConfig } = require('../library');
 
 /**
  * @examle
- * spread(dataObject, { first: targetA, second: targetB })
+ * spread({ source: dataObject, targets: { first: targetA, second: targetB } })
  * forward({
- *   to: spread({ first: targetA, second: targetB })
+ *   from: ...,
+ *   to: spread({ targets: { first: targetA, second: targetB } })
  * })
  */
-function spread(source, targetCases) {
-  if (targetCases === undefined) {
-    targetCases = source;
-    source = createEvent();
-  }
-  for (const key in targetCases) {
-    if (key in targetCases) {
-      const correctKey = guard(source, {
+function spread(argument) {
+  const { source, targets } = readConfig(argument, ['source', 'targets']);
+  const actualSource = source || createEvent();
+
+  for (const key in targets) {
+    if (key in targets) {
+      const correctKey = guard(actualSource, {
         filter: (data) =>
           typeof data === 'object' && data !== null && key in data,
       });
@@ -23,12 +23,12 @@ function spread(source, targetCases) {
       sample({
         source: correctKey,
         fn: (data) => data[key],
-        target: targetCases[key],
+        target: targets[key],
       });
     }
   }
 
-  return source;
+  return actualSource;
 }
 
 module.exports = { spread };
