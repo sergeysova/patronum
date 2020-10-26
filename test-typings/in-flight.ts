@@ -6,7 +6,7 @@ import {
   createEffect,
   createDomain,
 } from 'effector';
-import { inFlight } from '../in-flight';
+import { inFlight } from '../src/in-flight';
 
 // Check receive effects
 {

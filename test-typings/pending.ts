@@ -6,7 +6,7 @@ import {
   createEffect,
   createDomain,
 } from 'effector';
-import { pending } from '../pending';
+import { pending } from '../src/pending';
 
 // Check receive effects
 {

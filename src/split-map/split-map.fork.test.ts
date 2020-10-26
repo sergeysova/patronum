@@ -27,7 +27,7 @@ test('works in forked scope', async () => {
   });
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-rzpinn": 15,
+      "xwy4bm": 15,
     }
   `);
 
@@ -37,7 +37,7 @@ test('works in forked scope', async () => {
   });
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-rzpinn": -15,
+      "xwy4bm": -15,
     }
   `);
 });
@@ -67,7 +67,7 @@ test('do not affect another fork', async () => {
   });
   expect(serialize(scopeA)).toMatchInlineSnapshot(`
     Object {
-      "u8tzua": 200,
+      "l4dkuf": 200,
     }
   `);
 
@@ -77,7 +77,7 @@ test('do not affect another fork', async () => {
   });
   expect(serialize(scopeB)).toMatchInlineSnapshot(`
     Object {
-      "u8tzua": -5,
+      "l4dkuf": -5,
     }
   `);
 });
@@ -106,7 +106,7 @@ test('do not affect original store value', async () => {
   });
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "hxb2ra": 15,
+      "8sunrf": 15,
     }
   `);
   expect($data.getState()).toBe($data.defaultState);

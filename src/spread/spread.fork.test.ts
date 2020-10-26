@@ -21,8 +21,8 @@ test('works in forked scope', async () => {
   await allSettled(source, { scope, params: { first: 'sergey', second: 26 } });
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-3v3kjl": "sergey",
-      "-e0t46p": 26,
+      "-xihhjw": 26,
+      "nln5hw": "sergey",
     }
   `);
 });
@@ -79,14 +79,14 @@ test('do not affects another scope', async () => {
   ]);
   expect(serialize(scope1)).toMatchInlineSnapshot(`
     Object {
-      "-ce9ih1": "sergey",
-      "-cm0zu2": 26,
+      "-w3pd79": 26,
+      "f2h7kg": "sergey",
     }
   `);
   expect(serialize(scope2)).toMatchInlineSnapshot(`
     Object {
-      "-ce9ih1": "Anon",
-      "-cm0zu2": 90,
+      "-w3pd79": 90,
+      "f2h7kg": "Anon",
     }
   `);
 });

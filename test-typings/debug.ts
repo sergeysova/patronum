@@ -1,6 +1,6 @@
 import { expectType } from 'tsd';
 import { createEvent, createDomain, createEffect, createStore } from 'effector';
-import { debug } from '../debug';
+import { debug } from '../src/debug';
 
 // Allows each unit of effector
 {

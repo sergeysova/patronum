@@ -1,41 +1,41 @@
 import 'regenerator-runtime/runtime';
 import { createDomain } from 'effector';
 import { fork, serialize, allSettled } from 'effector/fork';
-import { debounce } from '.';
+import { throttle } from '.';
 
-test('debounce works in forked scope', async () => {
+test('throttle works in forked scope', async () => {
   const app = createDomain();
+  const source = app.createEvent();
+
   const $counter = app.createStore(0);
 
-  const trigger = app.createEvent();
+  const throttled = throttle({ source, timeout: 40 });
 
-  const debounced = debounce({ source: trigger, timeout: 40 });
-
-  $counter.on(debounced, (value) => value + 1);
+  $counter.on(throttled, (value) => value + 1);
 
   const scope = fork(app);
 
-  await allSettled(trigger, {
+  await allSettled(source, {
     scope,
     params: undefined,
   });
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "5fqfmh": 1,
+      "-ccpdi1": 1,
     }
   `);
 });
 
-test('debounce do not affect another forks', async () => {
+test('throttle do not affect another forks', async () => {
   const app = createDomain();
   const $counter = app.createStore(0);
 
   const trigger = app.createEvent<number>();
 
-  const debounced = debounce({ source: trigger, timeout: 40 });
+  const throttled = throttle({ source: trigger, timeout: 40 });
 
-  $counter.on(debounced, (value, payload) => value + payload);
+  $counter.on(throttled, (value, payload) => value + payload);
 
   const scopeA = fork(app);
   const scopeB = fork(app);
@@ -62,25 +62,25 @@ test('debounce do not affect another forks', async () => {
 
   expect(serialize(scopeA)).toMatchInlineSnapshot(`
     Object {
-      "r5878y": 2,
+      "hy6fqf": 2,
     }
   `);
 
   expect(serialize(scopeB)).toMatchInlineSnapshot(`
     Object {
-      "r5878y": 200,
+      "hy6fqf": 200,
     }
   `);
 });
 
-test('debounce do not affect original store value', async () => {
+test('throttle do not affect original store value', async () => {
   const app = createDomain();
   const $counter = app.createStore(0);
   const trigger = app.createEvent<number>();
 
-  const debounced = debounce({ source: trigger, timeout: 40 });
+  const throttled = throttle({ source: trigger, timeout: 40 });
 
-  $counter.on(debounced, (value, payload) => value + payload);
+  $counter.on(throttled, (value, payload) => value + payload);
 
   const scope = fork(app);
 
@@ -96,7 +96,7 @@ test('debounce do not affect original store value', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "hnz0j4": 2,
+      "8gx90l": 2,
     }
   `);
 

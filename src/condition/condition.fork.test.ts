@@ -28,9 +28,9 @@ test('condition works in forked scope', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-qh8eop": "",
-      "-qqszf6": true,
-      "6phgk": "Demo",
+      "cw5jjw": "",
+      "dp9ncp": true,
+      "tdeurd": "Demo",
     }
   `);
 });
@@ -74,20 +74,20 @@ test('do not affect another forks', async () => {
 
   expect(serialize(scope1)).toMatchInlineSnapshot(`
     Object {
-      "-pv4h23": "",
-      "ii1ors": "First",
+      "-d5oeyr": "First",
+      "3bkw8q": "",
     }
   `);
   expect(serialize(scope2)).toMatchInlineSnapshot(`
     Object {
-      "-pv4h23": "Second",
-      "ii1ors": "",
+      "-d5oeyr": "",
+      "3bkw8q": "Second",
     }
   `);
   expect(serialize(scope3)).toMatchInlineSnapshot(`
     Object {
-      "-pv4h23": "",
-      "ii1ors": "Third",
+      "-d5oeyr": "Third",
+      "3bkw8q": "",
     }
   `);
 });

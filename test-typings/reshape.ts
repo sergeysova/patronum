@@ -8,7 +8,7 @@ import {
   createEffect,
   createDomain,
 } from 'effector';
-import { reshape } from '../reshape';
+import { reshape } from '../src/reshape';
 
 // Reshapes store with string
 {

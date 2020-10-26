@@ -11,7 +11,7 @@
     "commit": "git-cz",
     "format": "prettier --write \"./src/**/**.{ts,tsx,js,jsx,json}\"",
     "lint": "eslint ./",
-    "prepublishOnly": "node ./.scripts/build.js && node ./.scripts/rollup.js && prettier --write ./babel-preset-plugins.json"
+    "prepublishOnly": "node ./.scripts/build.js && node ./.scripts/rollup.js && prettier --config ./.prettierrc --write ./babel-preset-plugins.json"
   },
   "files": [
     "*/*.d.ts",

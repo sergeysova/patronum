@@ -1,16 +1,16 @@
 import 'regenerator-runtime/runtime';
 import { createDomain } from 'effector';
 import { fork, serialize, allSettled } from 'effector/fork';
-import { some } from '.';
+import { every } from '.';
 
 test('throttle works in forked scope', async () => {
   const app = createDomain();
   const change = app.createEvent();
   const $first = app.createStore(0);
-  const $second = app.createStore(0).on(change, () => 1);
+  const $second = app.createStore(1).on(change, () => 0);
   const $third = app.createStore(0);
 
-  const _$result = some({ predicate: 1, stores: [$first, $second, $third] });
+  const _$result = every({ predicate: 1, stores: [$first, $second, $third] });
 
   const scope = fork(app);
 
@@ -21,10 +21,10 @@ test('throttle works in forked scope', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-b0ikr1": 1,
-      "-lkk1fg": true,
-      "-vkjewi": 0,
-      "-wlfbo8": 0,
+      "-nh73d7": 0,
+      "-nhvpbu": false,
+      "-ws9vwg": 0,
+      "vke6ox": 0,
     }
   `);
 });
@@ -38,7 +38,7 @@ test('throttle do not affect another forks', async () => {
     .on(change, (state, payload) => state + payload);
   const $third = app.createStore(0);
 
-  const _$result = some({
+  const _$result = every({
     predicate: (x) => x > 0,
     stores: [$first, $second, $third],
   });
@@ -68,18 +68,18 @@ test('throttle do not affect another forks', async () => {
 
   expect(serialize(scopeA)).toMatchInlineSnapshot(`
     Object {
-      "-lkk1fg": true,
-      "35aewt": 0,
-      "jq7xe": 0,
-      "l6jq27": 2,
+      "-l7l38": 2,
+      "-nhvpbu": false,
+      "-sgxiye": 0,
+      "9nyg8f": 0,
     }
   `);
   expect(serialize(scopeB)).toMatchInlineSnapshot(`
     Object {
-      "-lkk1fg": true,
-      "35aewt": 0,
-      "jq7xe": 0,
-      "l6jq27": 200,
+      "-l7l38": 200,
+      "-nhvpbu": false,
+      "-sgxiye": 0,
+      "9nyg8f": 0,
     }
   `);
 });
@@ -93,7 +93,7 @@ test('throttle do not affect original store value', async () => {
     .on(change, (state, payload) => state + payload);
   const $third = app.createStore(0);
 
-  const $result = some({
+  const $result = every({
     predicate: (x) => x > 0,
     stores: [$first, $second, $third],
   });
@@ -112,10 +112,10 @@ test('throttle do not affect original store value', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-lkk1fg": true,
-      "-z6isiu": 2,
-      "f7rrbh": 0,
-      "htbyaw": 0,
+      "-dsvzkb": 0,
+      "-nhvpbu": false,
+      "e2tyav": 2,
+      "obzzmi": 0,
     }
   `);
 

@@ -9,9 +9,11 @@ const writeFile = promisify(fs.writeFile);
 const packageMarker = 'index.d.ts';
 
 async function main() {
-  const found = await globby(`./*/${packageMarker}`);
+  const found = await globby(`./src/*/${packageMarker}`);
 
-  const names = found.map((name) => name.replace(`/${packageMarker}`, ''));
+  const names = found.map((name) =>
+    name.replace(`/${packageMarker}`, '').replace('./src/', ''),
+  );
 
   await createIndex(names);
   await createTypings(names);
@@ -21,7 +23,7 @@ async function main() {
 async function createIndex(names) {
   const imports = names.sort().map((name) => {
     const camel = camelCase(name);
-    return `module.exports.${camel} = require('./${name}').${camel};`;
+    return `module.exports.${camel} = require('./src/${name}').${camel};`;
   });
 
   await writeFile('./index.js', imports.join('\n') + '\n');
@@ -30,7 +32,7 @@ async function createIndex(names) {
 async function createTypings(names) {
   const types = names
     .sort()
-    .map((name) => `export { ${camelCase(name)} } from './${name}';`);
+    .map((name) => `export { ${camelCase(name)} } from './src/${name}';`);
 
   await writeFile('./index.d.ts', types.join('\n') + '\n');
 }

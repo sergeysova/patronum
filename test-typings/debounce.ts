@@ -7,7 +7,7 @@ import {
   createEvent,
   createEffect,
 } from 'effector';
-import { debounce } from '../debounce';
+import { debounce } from '../src/debounce';
 
 // Returns the same type as source
 {
