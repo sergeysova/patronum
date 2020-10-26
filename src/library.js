@@ -20,4 +20,11 @@ const readConfig = (part, properties, target = {}) => {
   return target;
 };
 
-module.exports = { readConfig };
+const throwError = (message) => {
+  throw new Error(message);
+};
+const throwTypeError = (message) => {
+  throw new TypeError(message);
+};
+
+module.exports = { readConfig, throwError, throwTypeError };
