@@ -7,7 +7,7 @@ import {
   createEvent,
   createEffect,
 } from 'effector';
-import { spread } from '../spread';
+import { spread } from '../src/spread';
 
 {
   const $source = createStore({ first: '', last: '' });

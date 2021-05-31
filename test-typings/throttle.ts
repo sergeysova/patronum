@@ -7,7 +7,7 @@ import {
   createEvent,
   createEffect,
 } from 'effector';
-import { throttle } from '../throttle';
+import { throttle } from '../src/throttle';
 
 // Returns the same type as source
 {

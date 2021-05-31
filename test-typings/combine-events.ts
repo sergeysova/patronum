@@ -7,7 +7,7 @@ import {
   createStore,
   createEffect,
 } from 'effector';
-import { combineEvents } from '../combine-events';
+import { combineEvents } from '../src/combine-events';
 
 // Check simple combine of different events
 {

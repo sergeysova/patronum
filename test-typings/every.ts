@@ -1,6 +1,6 @@
 import { expectType, expectError } from 'tsd';
 import { Store, createStore } from 'effector';
-import { every } from '../every';
+import { every } from '../src/every';
 
 // Check invalid type for number predicate
 {
