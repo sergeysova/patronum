@@ -4,6 +4,7 @@ module.exports.debounce = require('./debounce').debounce;
 module.exports.debug = require('./debug').debug;
 module.exports.delay = require('./delay').delay;
 module.exports.every = require('./every').every;
+module.exports.format = require('./format').format;
 module.exports.inFlight = require('./in-flight').inFlight;
 module.exports.pending = require('./pending').pending;
 module.exports.reshape = require('./reshape').reshape;

@@ -30,6 +30,7 @@
 - [Reshape](#reshape) — Destructure one store to different stores
 - [SplitMap](#splitmap) — Split event to different events and map data.
 - [Spread](#spread) — Send fields from object to same targets.
+- [Format](#format)
 
 ### Debug
 
@@ -461,6 +462,21 @@ serverActionReceived({ type: 'another' });
 
 [Try it](https://share.effector.dev/RRf57lK4)
 
+## Format
+
+[Method documentation & API](/format)
+
+```ts
+import { createStore } from 'effector';
+import { format } from 'patronum';
+
+const $firstName = createStore('John');
+const $lastName = createStore('Doe');
+
+const $fullName = format`${$firstName} ${$lastName}`;
+
+$fullName.watch(console.log); // => "John Doe"
+```
 
 # Development
 
