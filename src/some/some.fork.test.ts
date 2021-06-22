@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime';
 import { createDomain } from 'effector';
 import { fork, serialize, allSettled } from 'effector/fork';
-import { some } from './index';
+import { some } from '.';
 
 test('throttle works in forked scope', async () => {
   const app = createDomain();
@@ -21,9 +21,9 @@ test('throttle works in forked scope', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-2c1a0z": 0,
-      "-be2ofs": 1,
-      "-uke59j": 0,
+      "-b0ikr1": 1,
+      "-vkjewi": 0,
+      "-wlfbo8": 0,
     }
   `);
 });
@@ -65,16 +65,16 @@ test('throttle do not affect another forks', async () => {
 
   expect(serialize(scopeA)).toMatchInlineSnapshot(`
     Object {
-      "kbxzz9": 2,
-      "tdzee2": 0,
-      "xss3ar": 0,
+      "-ven97": 0,
+      "2o8sim": 0,
+      "kpi3o0": 2,
     }
   `);
   expect(serialize(scopeB)).toMatchInlineSnapshot(`
     Object {
-      "kbxzz9": 200,
-      "tdzee2": 0,
-      "xss3ar": 0,
+      "-ven97": 0,
+      "2o8sim": 0,
+      "kpi3o0": 200,
     }
   `);
 });
@@ -105,9 +105,9 @@ test('throttle do not affect original store value', async () => {
 
   expect(serialize(scope)).toMatchInlineSnapshot(`
     Object {
-      "-yeez55": 0,
-      "n5uzih": 2,
-      "w7wdxa": 0,
+      "1yica1": 0,
+      "5i5s1u": 0,
+      "njf378": 2,
     }
   `);
 

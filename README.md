@@ -30,6 +30,7 @@
 - [Reshape](#reshape) — Destructure one store to different stores
 - [SplitMap](#splitmap) — Split event to different events and map data.
 - [Spread](#spread) — Send fields from object to same targets.
+- [Snapshot](#snapshot) — Create store value snapshot.
 
 ### Debug
 
@@ -63,7 +64,7 @@ import { delay, inFlight } from 'patronum';
 Just import from `patronum/macro`, and imports will be replaced to full qualified:
 
 ```ts
-import { status, splitMap, combineEvents } from 'patronum/macro'
+import { status, splitMap, combineEvents } from 'patronum/macro';
 ```
 
 > Warning: babel-plugin-macros do not support `import * as name`!
@@ -192,9 +193,7 @@ import { createStore, createEvent, createEffect } from 'effector';
 import { debug } from 'patronum/debug';
 
 const event = createEvent();
-const effect = createEffect().use((payload) =>
-  Promise.resolve('result' + payload),
-);
+const effect = createEffect().use((payload) => Promise.resolve('result' + payload));
 const $store = createStore(0)
   .on(event, (state, value) => state + value)
   .on(effect.done, (state) => state * 10);
@@ -263,6 +262,37 @@ $second.watch(console.log); // => World
 ```
 
 [Try it](https://share.effector.dev/DmiLrYAC)
+
+## Snapshot
+
+[Method documentation & API](/snapshot)
+
+```ts
+import { restore, createEvent } from 'effector';
+import { snapshot } from 'patronum/snapshot';
+
+const changeText = createEvent<string>();
+const createSnapshot = createEvent();
+
+const $original = restore(changeText, 'Example');
+
+const $snapshot = snapshot({
+  source: $original,
+  clock: createSnapshot,
+});
+
+changeText('New text');
+
+// $original -> Store with "New text"
+// $snapshot -> Store with "Example"
+
+createSnapshot();
+
+// $original -> Store with "New text"
+// $snapshot -> Store with "New text"
+```
+
+[Try it](https://share.effector.dev/HcsNyGfM)
 
 ## CombineEvents
 
@@ -442,12 +472,8 @@ const received = splitMap({
 received.update.watch((payload) =>
   console.info('update received with content:', payload),
 );
-received.created.watch((payload) =>
-  console.info('created with value:', payload),
-);
-received.__.watch((payload) =>
-  console.info('unknown action received:', payload),
-);
+received.created.watch((payload) => console.info('created with value:', payload));
+received.__.watch((payload) => console.info('unknown action received:', payload));
 
 serverActionReceived({ type: 'created', value: 1 });
 // => created with value: 1
@@ -460,7 +486,6 @@ serverActionReceived({ type: 'another' });
 ```
 
 [Try it](https://share.effector.dev/RRf57lK4)
-
 
 # Development
 
