@@ -1,6 +1,6 @@
 import { expectType } from 'tsd';
 import { Store, createStore, createEvent, createEffect } from 'effector';
-import { snapshot } from '../snapshot';
+import { snapshot } from '../src/snapshot';
 
 // Check invalid type for source
 {

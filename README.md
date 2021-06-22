@@ -265,7 +265,7 @@ $second.watch(console.log); // => World
 
 ## Snapshot
 
-[Method documentation & API](/snapshot)
+[Method documentation & API](/src/snapshot)
 
 ```ts
 import { restore, createEvent } from 'effector';
