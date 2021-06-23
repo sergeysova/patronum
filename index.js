@@ -1,5 +1,6 @@
 module.exports.combineEvents = require('./combine-events').combineEvents;
 module.exports.condition = require('./condition').condition;
+module.exports.currentTime = require('./current-time').currentTime;
 module.exports.debounce = require('./debounce').debounce;
 module.exports.debug = require('./debug').debug;
 module.exports.delay = require('./delay').delay;

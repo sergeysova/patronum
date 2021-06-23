@@ -23,6 +23,7 @@
 - [Debounce](#debounce) — Creates event which waits until time passes after previous trigger.
 - [Delay](#delay) — Delays the call of the event by defined timeout.
 - [Throttle](#throttle) — Creates event which triggers at most once per timeout.
+- [CurrentTime](#currenttime) — Creates store with automatically updated `Date`.
 
 ### Combination/Decomposition
 
@@ -183,6 +184,39 @@ trigger(4);
 ```
 
 [Try it](https://share.effector.dev/OH0TUJUH)
+
+## CurrentTime
+
+[Method documentation & API](/current-time)
+
+```ts
+import { createEvent } from 'effector';
+import { currentTime } from 'patronum/current-time';
+
+// You should call this event for start updates
+const start = createEvent();
+
+// You can call this event for stop updates
+const stop = createEvent();
+
+const $now = currentTime({ start, stop });
+
+$now.watch((date) => console.log(`Now: ${date.valueOf()} ms`));
+
+start();
+
+// => Now X ms
+// wait 100ms
+// => Now (X+100) ms
+// wait 100ms
+// => Now (X+200) ms
+
+stop();
+
+// No more updates
+```
+
+[Try it](https://share.effector.dev/VSNFe1uu)
 
 ## Debug
 

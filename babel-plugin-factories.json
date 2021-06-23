@@ -3,6 +3,7 @@
     "patronum",
     "patronum/combine-events",
     "patronum/condition",
+    "patronum/currentTime",
     "patronum/debounce",
     "patronum/delay",
     "patronum/every",
@@ -19,6 +20,7 @@
   "mapping": {
     "combineEvents": "combine-events",
     "condition": "condition",
+    "currentTime": "currentTime",
     "debounce": "debounce",
     "delay": "delay",
     "every": "every",

@@ -1,5 +1,6 @@
 export { combineEvents } from './combine-events';
 export { condition } from './condition';
+export { currentTime } from './current-time';
 export { debounce } from './debounce';
 export { debug } from './debug';
 export { delay } from './delay';
